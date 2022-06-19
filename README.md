@@ -21,22 +21,21 @@ Invoke the plugin via hotkey or from the IDA Edit/Plugin menu -> "Yara4Ida".
 ##### Options
 
 **1) Place comments:** Automatically place match comments.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example "#YARA" placed comments output:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![comments example screenshot](/images/comments_screnshot.png)    
+Example "#YARA" placed comments output:      
+![comments example screenshot](/images/comments_screnshot.png)    
 
 **2) Single threaded:** Force single thread scanning. Else uses a thread per CPU core parallel scanning.  
 **3) Verbose messages:** Enable to show additional operational and development messages in IDA's output window.    
 
 ##### Buttons
 **[LOAD ALT RULES]:** Click to load another rules file other than the default ("signsrch_le.yar" little endian signsrch based rule set).  
-* For big endian, navigate to the "yara4ida_rules/signsrch" and select "signsrch_be.yar", or  
-"signsrch_le_be.yar" if mixed endian data such as with a little endian target with network byte order data, etc.
+* For big endian, navigate to the "yara4ida_rules/signsrch" and select "signsrch_be.yar", or "signsrch_le_be.yar" if mixed endian data such as with a little endian target with network byte order data, etc.
 
 **[CONTINUE]:** Press to start scanning.   
 
 After the scanning has completed the rule matches are displayed in an IDA chooser window.    
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example results output list:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![scan results screenshot](/images/results_screenshot.png)  
+Example results output list:  
+![scan results screenshot](/images/results_screenshot.png)  
 
 ##### Columns
 **Address:** Virtual address where the rule match is located.  
