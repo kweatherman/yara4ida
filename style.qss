@@ -1,0 +1,108 @@
+
+/* Yara4IDA Stylesheet by Kevin Weatherman */
+/* May 30, 2022 */
+
+/* Parent Dialog */
+QWidget
+{
+	color: #F2F2F1;
+    background-color: #303030;
+
+	font-family: Noto Sans, Tahoma;
+	font-size: 13px;
+	font-style: normal;
+}
+
+/* Bottom row push buttons */
+/* MD flat style */
+QPushButton
+{
+	color: #FFF176;
+	font-weight: bold;
+	padding: 7px;
+	min-width: 37px;
+	border-style: none;
+}
+QPushButton:hover
+{
+	background-color: #4A4A4A;
+}
+QPushButton:pressed
+{
+	background-color: #595959;
+}
+QPushButton:focus
+{
+	background-color: #4A4A4A;
+}
+
+/* "ALT RULES" push button */
+QPushButton#pushButton1
+{ 
+	color: #F2F2F1;
+	background-color: #3E3E3E;
+}
+QPushButton#pushButton1:hover
+{
+	background-color: #75726D;
+}
+QPushButton#pushButton1:pressed
+{
+	background-color: #5E5E5E;
+}
+
+QDialogButtonBox
+{
+	/* MD typeically has the cancel/reject button first */
+	button-layout: 1;
+}
+
+
+/* Version label */
+QLabel#versionLabel
+{
+	color: #4A4C56;
+	font-size: 10px;
+	background-color: transparent;
+}
+
+
+/* Hyperlink */
+/* The actual link color is set inside the link text, see UI file */
+QLabel#linkLabel
+{
+	height: 50px;
+}
+/* Despite what the Qt docs says ':hover' does work, albeit with limited control */
+QLabel#linkLabel:hover
+{
+	background-color: #4A4A4A;
+}
+
+
+/* Check boxes */
+QCheckBox::indicator
+{
+	background-color: #303030;
+	border: 2px solid #777777;
+	border-radius: 1px;
+   width: 10px;
+   height: 10px;
+}
+QCheckBox::indicator:checked
+{
+	border: 2px solid #F2F2F1;
+	border-radius: 1px;
+	width: 10px;
+	height: 10px;
+	image: url(:/template/checkbox-checked.png);
+
+}
+QCheckBox::hover
+{
+	background-color: #4A4A4A;
+}
+QCheckBox::indicator:unchecked:hover
+{
+	background-color: #4A4A4A;
+}

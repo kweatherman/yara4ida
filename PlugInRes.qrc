@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/template">
+        <file>banner.png</file>
+        <file>icon.png</file>
+        <file>checkbox-checked.png</file>
+        <file>progress-style.qss</file>
+        <file>style.qss</file>
+    </qresource>
+</RCC>

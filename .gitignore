@@ -1,0 +1,11 @@
+
+# Misc local project stuff
+desktop.ini
+LocalData/
+yara-master/
+update_libs.bat
+
+# Visual Studio
+.vs/
+x64/
+*.aps

@@ -1,0 +1,12 @@
+
+# Set Windows scripts to always keep CRLF line endings
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf
+
+# Set Linux scripts to always keep LF line endings
+*.sh text eol=lf
+
+# Explicitly set these binary types rather than relying on git file detection
+*.lib merge=binary
+*.pdb merge=binary
+*.png merge=binary
