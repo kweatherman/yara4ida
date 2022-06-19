@@ -16,7 +16,7 @@ Requires IDA Pro version 7.7'ish.
 ### Using
 Invoke the plugin via hotkey or from the IDA Edit/Plugin menu -> "Yara4Ida".  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![dialog screenshot](/images/dialog_screnshot.png)
+![dialog screenshot](/images/dialog_screnshot.png)
 
 ##### Options
 
