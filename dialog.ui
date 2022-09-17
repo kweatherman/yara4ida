@@ -148,7 +148,7 @@
     <enum>QFrame::Sunken</enum>
    </property>
    <property name="text">
-    <string>&lt;a href=&quot;https://github.com/kweatherman/yara4idal/&quot; style=&quot;color:#AEADA9;&quot;&gt;Yara4Ida Github&lt;/a&gt;</string>
+    <string>&lt;a href=&quot;https://github.com/kweatherman/yara4ida/&quot; style=&quot;color:#AEADA9;&quot;&gt;Yara4Ida Github&lt;/a&gt;</string>
    </property>
    <property name="textFormat">
     <enum>Qt::AutoText</enum>

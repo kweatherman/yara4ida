@@ -123,7 +123,7 @@ public:
 #ifndef QT_NO_TOOLTIP
         linkLabel->setToolTip(QApplication::translate("MainCIDialog", "Click to open the Yara4Ida Github.", nullptr));
 #endif // QT_NO_TOOLTIP
-        linkLabel->setText(QApplication::translate("MainCIDialog", "<a href=\"https://github.com/kweatherman/yara4idal/\" style=\"color:#AEADA9;\">Yara4Ida Github</a>", nullptr));
+        linkLabel->setText(QApplication::translate("MainCIDialog", "<a href=\"https://github.com/kweatherman/yara4ida/\" style=\"color:#AEADA9;\">Yara4Ida Github</a>", nullptr));
         image->setText(QString());
         Q_UNUSED(MainCIDialog);
     } // retranslateUi
