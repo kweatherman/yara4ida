@@ -369,7 +369,10 @@ static bool idaapi run(size_t arg)
 {
 	// Don't run again while our chooser is already up
 	if (listChooserUp)
+	{
 		PlaySound((LPCSTR) SND_ALIAS_SYSTEMEXCLAMATION, NULL, (SND_ALIAS_ID | SND_ASYNC));
+		return true;
+	}
 
 	BOOL success = FALSE;
 	BOOL compileError = FALSE;

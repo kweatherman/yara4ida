@@ -65,13 +65,12 @@ public:
 		{
 			m_started = TRUE;
 
-			// Set the pool size max to the CPU logical core count if the user didn't argument override it
+			// Set the pool size max to the CPU physical core count if the user didn't override it			
+			// The thread pool API doesn't allow us to force or suggest physical cores. 
+			// SMT threads won't help the scan performance of complex Yara rules, the compute of actual physical cores will.
 			if (m_maxThreads == 0)
-			{				
-				// TODO: Depending on the workloads, might just want use only physical cores vs using any HT/SMT ones								
-				m_maxThreads = GetLogicalCoreCount();
-			}			
-			
+				m_maxThreads = GetPhysicalCoreCount();			
+						
 			SetThreadpoolThreadMinimum(m_pool, 0);
 			SetThreadpoolThreadMaximum(m_pool, m_maxThreads);
 
@@ -169,7 +168,7 @@ public:
 	
 	// Construct object:
 	// initResult = HRESULT initialize result. ERROR_SUCCESS on success, else FAILED status
-	// maxThreadCount = Optionally limit the max pool threads to this count, default '0' to use max one thread per logical core.
+	// maxThreadCount = Optionally limit the max pool threads to this count, default '0' to use max one thread per physical core.
 	ConcurrentCallbackGroup(__out HRESULT &initResult, __in_opt UINT32 maxThreadCount = 0) :
 		m_completed(0), m_workerErrors(0), m_started(FALSE), m_pool(NULL), m_cleanupGroup(NULL)
 	{
@@ -212,12 +211,32 @@ public:
 	// Note: Queued callbacks are canceled, but started callbacks will block until they are completed
 	~ConcurrentCallbackGroup() { Cleanup(); }
 
-	// Get CPU logical (combined physical and HT/SMT) core counts
-	static UINT32 GetLogicalCoreCount()
-	{		
-		SYSTEM_INFO nfo = { 0 };
-		GetSystemInfo(&nfo);
-		return nfo.dwNumberOfProcessors;
+	// Get CPU physical core count
+	static UINT32 GetPhysicalCoreCount()
+	{
+		UINT32 cores = 0;
+
+		// 1st pass get buffer size
+		PBYTE buffer = NULL;
+		DWORD length = 0;
+		if (!GetLogicalProcessorInformationEx(RelationProcessorCore, (PSYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX) buffer, &length))
+		{
+			if (GetLastError() == ERROR_INSUFFICIENT_BUFFER)			
+				buffer = new BYTE[length];
+			if (buffer)
+			{
+				// 2nd pass read CPU info
+				if (GetLogicalProcessorInformationEx(RelationProcessorCore, (PSYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX) buffer, &length))
+				{
+					// Physical core count is the count of 'RelationProcessorCore' entries
+					cores = (length / ((PSYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX) buffer)->Size);
+				}
+
+				delete buffer;				
+			}
+		}
+
+		return max(1, cores);
 	}
 
 private:

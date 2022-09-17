@@ -11,7 +11,7 @@ Copy `yara4ida.dll`, `yara4ida64.dll` and the `yara4ida_rules` folder to your ID
 
 The default IDA hot key is "Ctrl-Y", but can be configured to another via your IDA "plugins.cfg" config file.  
 
-Requires IDA Pro version 7.7'ish.  
+Requires IDA Pro version 8'ish.  
 
 ### Using
 Invoke the plugin via hotkey or from the IDA Edit/Plugin menu -> "Yara4Ida".  
@@ -62,8 +62,7 @@ Dependencies:
 * Customized build of libyara (libs included in repo): https://github.com/kweatherman/yara
 * My IDA WaitBoxEx library (included in repo)
 * [Qt framework](https://www.qt.io/) headers (using the IDA SDK Qt libraries) for the UI.  
-&nbsp;Using Qt 5.6.3 headers here, although IDA moved to 5.15.3 as of IDA 7.7, the previous Qt version still works without issue  
- since just the headers are required. (See my blog posts [Qt 5.4 User Interfaces for IDA Pro C/C++ plug-in development](http://www.macromonkey.com/qt-5-4-user-interfaces-for-ida-pro-cc-plug-in-development/),  
+&nbsp;Using Qt Qt 5.12.12 headers, although IDA moved to 5.15.3 as of IDA 7.7, older Qt version still works without issue since just the headers are required. (See my blog posts [Qt 5.4 User Interfaces for IDA Pro C/C++ plug-in development](http://www.macromonkey.com/qt-5-4-user-interfaces-for-ida-pro-cc-plug-in-development/),  
  [Qt 4.8.4 on Windows for IDA Pro C/C++ plug-in development](http://www.macromonkey.com/qt-4-8-4-on-windows-for-ida-pro-cc-plug-in-development-part-1/), [the QStringLiteral issue](http://www.macromonkey.com/building-qt-ida-plugins-and-the-qstringliteral-issue/), etc).
   
 

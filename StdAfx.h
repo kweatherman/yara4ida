@@ -62,7 +62,7 @@
 #define MSG_TAG "Yara4Ida: "
 #include "Utility.h"
 
-#define MY_VERSION MAKE_SEMANTIC_VERSION(VERSION_RELEASE, 1, 0, 0)
+#define MY_VERSION MAKE_SEMANTIC_VERSION(VERSION_RELEASE, 1, 1, 0)
 
 #include "libyara\include\yara.h"
 #include "WaitBoxEx.h"

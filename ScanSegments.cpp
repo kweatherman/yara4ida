@@ -150,11 +150,11 @@ BOOL ScanSegments(__out MATCHES &matches)
 	{
 		UINT32 scanThreads = optionSingleThread ? 1 : 0;
 		if (scanThreads != 1)
-			scanThreads = ConcurrentCallbackGroup::GetLogicalCoreCount();
+			scanThreads = ConcurrentCallbackGroup::GetPhysicalCoreCount();
 		if(scanThreads == 1)
 			msg("\n" MSG_TAG "Using single threaded scanning.\n");
 		else
-			msg("\n" MSG_TAG "Using up to %u logical core threads for scanning.\n", scanThreads);
+			msg("\n" MSG_TAG "Using up to %u physical core threads for scanning.\n", scanThreads);
 		
 		// Instance the callback manager
 		HRESULT hr = E_FAIL;
