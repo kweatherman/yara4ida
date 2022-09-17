@@ -22,7 +22,7 @@ The WORKER_CALLBACK callbacks should return FALSE for success or TRUE on error.
 Pass opaque data to the callbacks via the "PVOID lParm" argument.
 It's up to the callback do any atomic operations to be thread safe if external shared resource data are used.
 
-Version: 1.0.0 2/14/2022
+Version: 1.1.0 9/17/2022
 Author: Kevin Weatherman
 */
 class ConcurrentCallbackGroup
