@@ -34,7 +34,9 @@
 #include <loader.hpp>
 #include <search.hpp>
 #include <typeinf.hpp>
+#if IDA_SDK_VERSION < 900
 #include <struct.hpp>
+#endif
 #include <nalt.hpp>
 #pragma warning(pop)
 
