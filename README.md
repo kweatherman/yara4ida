@@ -7,11 +7,11 @@ And as a general upgraded replacement for my deprecated IDA Signsrch plugin.
 
 ### Installation
 
-Copy `yara4ida.dll`, `yara4ida64.dll` and the `yara4ida_rules` folder to your IDA `plugins` directory.  
+Copy `yara4ida.dll` and the `yara4ida_rules` folder to your IDA `plugins` folder.  
 
-The default IDA hot key is "Ctrl-Y", but can be configured to another via your IDA "plugins.cfg" config file.  
+The default IDA hot key is "Alt-Y", but can be configured to another via your IDA "plugins.cfg" config file.  
 
-Requires IDA Pro version 8'ish.  
+Requires IDA Pro version 9.2'ish.  
 
 ### Using
 Invoke the plugin via hotkey or from the IDA Edit/Plugin menu -> "Yara4Ida".  
