@@ -2,6 +2,7 @@
 // Concurrent callback support
 #pragma once
 
+#include "stdafx.h"
 #include <list>
 
 /*
@@ -236,7 +237,7 @@ public:
 			}
 		}
 
-		return max(1, cores);
+		return cores == 0 ? 1 : cores;
 	}
 
 private:
@@ -271,11 +272,11 @@ private:
 
 		// Call worker callback
 		BOOL result = TRUE;
-		__try
+		try
 		{
 			result = wrk.callback(wrk.lParm);
 		}
-		__except (ReportException("ConcurrentCallbackGroup::CallbackWrapper", GetExceptionInformation(), TRUE)){ result = TRUE; }
+		CATCH()
 
 		if (result)
 		{

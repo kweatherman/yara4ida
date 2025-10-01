@@ -162,7 +162,7 @@ BOOL ScanSegments(__out MATCHES &matches)
 		if (!ccg || (hr != ERROR_SUCCESS))
 		{
 			char buffer[1024];
-			msg("** ConcurrentCallbackGroup() create failed! Reason: \"%s\" **\n", GetLastErrorString(hr, buffer));
+			msg("** ConcurrentCallbackGroup() create failed! Reason: \"%s\" **\n", GetErrorString(hr, buffer));
 			goto exit;
 		}		
 
@@ -192,15 +192,17 @@ BOOL ScanSegments(__out MATCHES &matches)
 					case SEG_COMM:
 					case SEG_IMEM:
 					{
-						//msg(MSG_TAG "Skip segment: \"%s\", \"%s\", %d, " EAFORMAT " - " EAFORMAT ", %s\n", name.c_str(), classStr.c_str(), seg->type, seg->start_ea, seg->end_ea, byteSizeString(seg->size()));
+						//msg(MSG_TAG "Skip segment: \"%s\", \"%s\", %d, 0x%llX - 0x%llX, %s\n", name.c_str(), classStr.c_str(), seg->type, seg->start_ea, seg->end_ea, byteSizeString(seg->size()));
 						//REFRESH_UI();							
 					}
 					break;
 
 					default:
-					{
-						char buffer[32];
-						msg(" \"%s\", %s, " EAFORMAT " - " EAFORMAT ", %s\n", name.c_str(), classStr.c_str(), seg->start_ea, seg->end_ea, ByteSizeString(seg->size(), buffer));
+					{		
+						if (!plat.is64)
+							msg(" \"%s\", %s, 0x%08llX - 0x%08llX, %s\n", name.c_str(), classStr.c_str(), seg->start_ea, seg->end_ea, byteSizeString(seg->size()));
+						else
+							msg(" \"%s\", %s, 0x%014llX - 0x%014llX, %s\n", name.c_str(), classStr.c_str(), seg->start_ea, seg->end_ea, byteSizeString(seg->size()));
 						REFRESH_UI();
 						if (seg->size() > 0)
 						{
@@ -212,9 +214,9 @@ BOOL ScanSegments(__out MATCHES &matches)
 							// Depending on the thread pool size will either start now or will be queued for later
 							HRESULT hr = ccg->Add(SegmentScanWorker, sp, TRUE);
 							if (hr != ERROR_SUCCESS)
-							{
+							{								
 								char buffer[1024];
-								msg("** ConcurrentCallbackGroup::Add() failed! Reason: \"%s\" **\n", GetLastErrorString(hr, buffer));
+								msg("** ConcurrentCallbackGroup::Add() failed! Reason: \"%s\" **\n", GetErrorString(hr, buffer));
 								goto exit;
 							}
 							else
@@ -248,7 +250,7 @@ BOOL ScanSegments(__out MATCHES &matches)
 		if (hr != ERROR_SUCCESS)
 		{
 			char buffer[1024];
-			msg("** ConcurrentCallbackGroup::Poll() scanning failed! HR: 0x%X \"%s\", Total errors: %d **\n", hr, GetLastErrorString(hr, buffer), errorCount);
+			msg("** ConcurrentCallbackGroup::Poll() scanning failed! HR: 0x%X \"%s\", Total errors: %d **\n", hr, GetErrorString(hr, buffer), errorCount);
 			goto exit;
 		}
 		
@@ -288,7 +290,7 @@ BOOL ScanSegments(__out MATCHES &matches)
 		{
 			// Now report if there was a scan error
 			char buffer[1024];
-			msg(MSG_TAG "** YARA scan failed! Reason: \"%s\", errors: %d **\n", GetLastErrorString(hr, buffer), errorCount);
+			msg(MSG_TAG "** YARA scan failed! Reason: \"%s\", errors: %d **\n", GetErrorString(hr, buffer), errorCount);
 			REFRESH_UI();
 		}		
 

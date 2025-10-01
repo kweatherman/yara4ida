@@ -7,7 +7,7 @@
 
 extern void AltFileBtnHandler();
 
-MainDialog::MainDialog(BOOL &optionPlaceComments, BOOL &optionSingleThread, BOOL &optionVerbose) : QDialog(QApplication::activeWindow(), 0)
+MainDialog::MainDialog(BOOL &optionPlaceComments, BOOL &optionSingleThread, BOOL &optionVerbose) : QDialog(QApplication::activeWindow())
 {
     Ui::MainCIDialog::setupUi(this);
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);

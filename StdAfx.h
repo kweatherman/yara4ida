@@ -17,6 +17,7 @@
 #include <intrin.h>
 #pragma intrinsic(memset, memcmp, memcpy, strcat, strcmp, strcpy, strlen, abs, fabs, labs, atan, atan2, tan, sqrt, sin, cos, _rotl)
 
+#include <algorithm>
 #include <string>
 #include <map>
 #include <vector>
@@ -27,14 +28,14 @@
 //#define NO_OBSOLETE_FUNCS
 // Nix the many warning about int type conversions
 #pragma warning(push)
-#pragma warning(disable:4244)
-#pragma warning(disable:4267)
+#pragma warning(disable:4244) // conversion from 'ssize_t' to 'int', possible loss of data
+#pragma warning(disable:4267) // conversion from 'size_t' to 'uint32', possible loss of data
+#pragma warning(disable:4018) // warning C4018: '<': signed/unsigned mismatch
 #include <ida.hpp>
 #include <auto.hpp>
 #include <loader.hpp>
 #include <search.hpp>
 #include <typeinf.hpp>
-#include <struct.hpp>
 #include <nalt.hpp>
 #pragma warning(pop)
 
@@ -47,22 +48,16 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTableView>
 // IDA SDK Qt libs
-#pragma comment(lib, "Qt5Core.lib")
-#pragma comment(lib, "Qt5Gui.lib")
-#pragma comment(lib, "Qt5Widgets.lib")
-
-// QT_NO_UNICODE_LITERAL must be defined (best in preprocessor setting) so 
-// Qt doesn't use a static string pool that will cause IDA to crash on unload.
-#ifndef QT_NO_UNICODE_LITERAL
-# error QT_NO_UNICODE_LITERAL must be defined to avoid Qt string crashes
-#endif
+#pragma comment(lib, "Qt6Core.lib")
+#pragma comment(lib, "Qt6Gui.lib")
+#pragma comment(lib, "Qt6Widgets.lib")
 
 #define STYLE_PATH ":/template/"
 
 #define MSG_TAG "Yara4Ida: "
 #include "Utility.h"
 
-#define MY_VERSION MAKE_SEMANTIC_VERSION(VERSION_RELEASE, 1, 1, 1)
+#define MY_VERSION MAKE_SEMANTIC_VERSION(VERSION_RELEASE, 1, 2, 0)
 
 #include "libyara\include\yara.h"
 #include "WaitBoxEx.h"

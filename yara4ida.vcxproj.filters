@@ -2,54 +2,35 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MainDialog.cpp">
-      <Filter>Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="Utility.cpp">
+    <ClCompile Include="ScanSegments.cpp" />
+    <ClCompile Include="MainDialog.cpp" />
+    <ClCompile Include="..\IDA_Support\Utility\Utility.cpp">
       <Filter>Support</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug64\moc_MainDialog.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_MainDialog.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release64\moc_MainDialog.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_MainDialog.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\qrc_PlugInRes.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ScanSegments.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Utility.h">
-      <Filter>Support</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_dialog.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WaitBoxEx\WaitBoxEx.h">
-      <Filter>Support</Filter>
-    </ClInclude>
     <ClInclude Include="ConcurrentCallbacks.h">
+      <Filter>Support</Filter>
+    </ClInclude>
+    <ClInclude Include="..\IDA_Support\IDA_WaitEx\WaitBoxEx.h">
+      <Filter>Support</Filter>
+    </ClInclude>
+    <ClInclude Include="..\IDA_Support\IDA_SegmentSelect\SegSelect.h">
+      <Filter>Support</Filter>
+    </ClInclude>
+    <ClInclude Include="..\IDA_Support\IDA_OggPlayer\IdaOgg.h">
+      <Filter>Support</Filter>
+    </ClInclude>
+    <ClInclude Include="..\IDA_Support\Utility\Utility.h">
       <Filter>Support</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="StdAfx.h" />
-    <CustomBuild Include="dialog.ui">
-      <Filter>Form Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="MainDialog.h">
-      <Filter>Dialogs</Filter>
-    </CustomBuild>
-    <CustomBuild Include="PlugInRes.qrc">
-      <Filter>Resource Files</Filter>
-    </CustomBuild>
+    <QtMoc Include="MainDialog.h" />
+    <QtUic Include="dialog.ui">
+      <Filter>Forms</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <Image Include="banner.png">
@@ -71,12 +52,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Form Files">
-      <UniqueIdentifier>{b623a3f6-c0f5-47d5-9fda-d2e5a7329821}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Dialogs">
-      <UniqueIdentifier>{168979dc-0ebd-4ee6-9013-f202ff939e8e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Doc">
       <UniqueIdentifier>{e8f62945-eddb-4008-8e83-c53c458a5292}</UniqueIdentifier>
     </Filter>
@@ -86,8 +61,8 @@
     <Filter Include="Support">
       <UniqueIdentifier>{70f8cb6a-bb8f-4a4a-9abd-95ff88aa5c5a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Generated Files">
-      <UniqueIdentifier>{24688419-7f9a-448f-aa60-71565d020abc}</UniqueIdentifier>
+    <Filter Include="Forms">
+      <UniqueIdentifier>{b623a3f6-c0f5-47d5-9fda-d2e5a7329821}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -103,5 +78,10 @@
     <Text Include="LocalData\notes.txt">
       <Filter>Doc</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="PlugInRes.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
   </ItemGroup>
 </Project>

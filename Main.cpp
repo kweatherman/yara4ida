@@ -10,7 +10,7 @@
 #endif
 
 #define DEFAULT_RULES_FOLDER L"yara4ida_rules\\default.yar"
-#define DEFAULT_SHORTCUT "Ctrl-Y"
+#define DEFAULT_SHORTCUT "Alt-Y"
 #define COMMENT_TAG "#YARA: "
 
 static plugmod_t* idaapi init();
@@ -97,7 +97,7 @@ static void idaapi term()
 			initResourcesOnce = FALSE;
 		}
 	}
-	CATCH("term()")
+	CATCH()
 }
 
 // ------------------------------------------------------------------------------------------------
@@ -228,7 +228,7 @@ public:
 			cols[COL_FILE] = ((m.rule->ns && m.rule->ns->name) ? m.rule->ns->name : "?????");
 			*icon_ = -1;
 		}
-		CATCH("MatchChooser:get_row()")
+		CATCH()
 	}
 
 private:
@@ -244,7 +244,7 @@ int MatchChooser::_widths[COL_COUNT] = { /*Address*/ 12, /*Description*/ 40, /*T
 // YARA compile warnings and error callback
 static void YaraCompilerStatusCallback(int error_level, __in const char *file_name, int line_number, __in const YR_RULE *rule, __in const char *message, __in void *user_data)
 {
-	__try
+	try
 	{
 		switch (error_level)
 		{
@@ -272,9 +272,15 @@ static void YaraCompilerStatusCallback(int error_level, __in const char *file_na
 		msg(" Reason: \"%s\"\n", message);
 		REFRESH_UI();
 	}
-	__except (ReportException("YaraCompilerStatusCallback", GetExceptionInformation()))
+	catch (std::exception &ex)
 	{
-		*((LPBOOL)user_data) = TRUE;
+		msg("** STD C++ exception!: What: \"%s\", Function: \"%s\" **\n", ex.what(), __FUNCTION__);
+		*((LPBOOL) user_data) = TRUE;
+	} 
+	catch (...)
+	{
+		msg("** C/C++ exception! Function: \"%s\" **\n", __FUNCTION__); 
+		*((LPBOOL) user_data) = TRUE;
 	}
 }
 
@@ -329,7 +335,7 @@ static const char* YaraCompilerIncludesCallback(__in const char *include_name, _
 		success = (fread(fileBuffer, (size_t)fileSize, 1, fp) == 1);
 		fileBuffer[fileSize] = 0;
 	}
-	CATCH("YaraCompilerIncludesCallback()")
+	CATCH()
 
 	exit:;
 	if (fp)
@@ -398,6 +404,9 @@ static bool idaapi run(size_t arg)
 		PathRemoveFileSpecW(rulesPath);
 		wcscat(rulesPath, L"\\" DEFAULT_RULES_FOLDER);
 
+		// Configure platform specifics
+		plat.Configure();
+
 		if (!initResourcesOnce)
 		{
 			initResourcesOnce = TRUE;
@@ -426,8 +435,8 @@ static bool idaapi run(size_t arg)
 		WaitBox::updateAndCancelCheck(-1);
 		REFRESH_UI();
 
-		char numBuff[32], timeBuff[64];
-		TIMESTAMP startTime = GetTimestamp();
+		char numBuff[32];
+		TIMESTAMP startTime = GetTimeStamp();
 		yaraInitalized = yr_initialize();
 		if (yaraInitalized != ERROR_SUCCESS)
 		{
@@ -489,7 +498,7 @@ static bool idaapi run(size_t arg)
 			msg(MSG_TAG "** YARA yr_compiler_get_rules() failed with: %s **\n", YaraStatusString(yaraResult));
 			goto exit;
 		}
-		msg("%s rules loaded in %s\n", NumberCommaString(g_rules->num_rules, numBuff), TimestampString(GetTimestamp() - startTime, timeBuff));
+		msg("%s rules loaded in %s\n", NumberCommaString(g_rules->num_rules, numBuff), TimeString(GetTimeStamp() - startTime));
 		if (g_rules->num_rules == 0)
 		{
 			msg("* No rules loaded, aborted *\n");
@@ -580,7 +589,7 @@ static bool idaapi run(size_t arg)
 			//	iconID = load_custom_icon(iconData, sizeof(iconData), "png");
 			MatchChooser *chooser = new MatchChooser();
 			success = listChooserUp = (chooser && (chooser->choose() == 0));
-			msg(MSG_TAG "Found %s matches in %s\n", NumberCommaString(matches.size(), numBuff), TimestampString(GetTimestamp() - startTime, timeBuff));
+			msg(MSG_TAG "Found %s matches in %s\n", NumberCommaString(matches.size(), numBuff), TimeString(GetTimeStamp() - startTime));
 		}
 		else
 		{
@@ -588,7 +597,7 @@ static bool idaapi run(size_t arg)
 			goto exit;
 		}
 	}
-	CATCH("run()")
+	CATCH()
 
 	exit:;
 	if (fp)

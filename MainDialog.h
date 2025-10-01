@@ -1,5 +1,5 @@
 
-// Desc: Main dialog handler
+// Main Dialog
 #pragma once
 
 #include "stdafx.h"
