@@ -56,15 +56,14 @@ YARA seemed fit the bill for a few reasons:
 
 ### Building
 
-Built using Visual Studio 2022 on Windows 10.  
+Built using Visual Studio 2022 on Windows 11.  
 Dependencies:
+
 * The official IDA Pro C/C++ SDK.
 * Customized build of libyara (libs included in repo): https://github.com/kweatherman/yara
 * My IDA WaitBoxEx library (included in repo)
 * [Qt framework](https://www.qt.io/) headers (using the IDA SDK Qt libraries) for the UI.  
-&nbsp;Using Qt Qt 5.12.12 headers, although IDA moved to 5.15.3 as of IDA 7.7, older Qt version still works without issue since just the headers are required. (See my blog posts [Qt 5.4 User Interfaces for IDA Pro C/C++ plug-in development](http://www.macromonkey.com/qt-5-4-user-interfaces-for-ida-pro-cc-plug-in-development/),  
- [Qt 4.8.4 on Windows for IDA Pro C/C++ plug-in development](http://www.macromonkey.com/qt-4-8-4-on-windows-for-ida-pro-cc-plug-in-development-part-1/), [the QStringLiteral issue](http://www.macromonkey.com/building-qt-ida-plugins-and-the-qstringliteral-issue/), etc).
-  
+   (See my blog posts [Qt 5.4 User Interfaces for IDA Pro C/C++ plug-in development](http://www.macromonkey.com/qt-5-4-user-interfaces-for-ida-pro-cc-plug-in-development/),  
 
 Setup in the project file, it looks for an environment variable `_IDADIR` from which it expects to find a "idasdk/include" and a "idasdk/lib" folder where the IDA SDK is located.  
 Not using `IDADIR` since IDA looks for it itself and can cause a conflict if you try to use more than one installed IDA version.
